@@ -1,0 +1,26 @@
+{
+  "name": "vlang.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./test.ts",
+    "build": "tsc --declaration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolassiu/vlisp-parse.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicolassiu/vlisp-parse/issues"
+  },
+  "homepage": "https://github.com/nicolassiu/vlisp-parse#readme",
+  "devDependencies": {
+    "@types/node": "^13.1.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
+}
