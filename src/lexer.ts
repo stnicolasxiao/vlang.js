@@ -76,8 +76,14 @@ export default class Lexer {
   isEol(): boolean {
     return this.cc == '' || this.cc == '\r' || this.cc == '\n'
   }
+  isEof():boolean {
+    return this.tokenType == TokenType.TTEOF
+  }
   isKeyword(token: string): boolean {
     return this.token == token && this.tokenType == TokenType.TTIDEN
+  }
+  isOp(token: string): boolean {
+    return this.token == token && this.tokenType == TokenType.TTOP
   }
   nextToken() {
     while (isSpace(this.cc)) {

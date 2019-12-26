@@ -1,6 +1,15 @@
 
 export enum NodeType {
-  NTFUNTION
+  NTFUNTION,
+  NTSEQ,
+  NTVARINIT,
+  NTASSIGN,
+  NTADD,
+  NTSUB,
+  NTID,
+  NTNUM,
+  NTLIT,
+  NTCHARLIT
 }
 
 export default class AstNode {
