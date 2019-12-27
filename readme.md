@@ -1,4 +1,4 @@
-# vlang interpreter running on web
+# a v lang interpreter running on web
 
 features:
 
