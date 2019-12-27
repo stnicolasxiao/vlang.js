@@ -148,7 +148,9 @@ export default class Parser {
 
           if (this.lexer.isOp('(')) {
             this.lexer.nextToken()
-            this.parseArgs()
+            let argsNode:AstNode=this.parseArgs()
+            node.addSubNode(argsNode)
+            node.nodeType=NodeType.NTCALL
             this.matchOp(')')
           }
           return node
@@ -179,20 +181,23 @@ export default class Parser {
         }
       default:
         {
-          throw new Error('not support '+this.lexer.token)
+          throw new Error('not support ' + this.lexer.token)
           break;
         }
     }
   }
 
-  parseArgs() {
+  parseArgs(): AstNode {
+    let argsNode: AstNode = new AstNode(NodeType.NTARGS)
     while (!this.lexer.isOp(')') && !this.lexer.isEof()) {
-      this.parseExpression()
+      let argNode: AstNode = this.parseExpression()
+      argsNode.addSubNode(argNode)
       if (this.lexer.isOp(',')) {
         this.lexer.nextToken()
       } else {
         break;
       }
     }
+    return argsNode
   }
 }

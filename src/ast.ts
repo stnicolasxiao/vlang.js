@@ -6,6 +6,8 @@ export enum NodeType {
   NTASSIGN,
   NTADD,
   NTSUB,
+  NTCALL,
+  NTARGS,
   NTID,
   NTNUM,
   NTLIT,
