@@ -1,9 +1,7 @@
-# vlisp torelant parser for lsp
-
-This parser is developed for lsp.
+# vlang interpreter running on web
 
 features:
 
-1. errors torelant
-2. autocomplete suggest list
-3. incremental source parsing
+1. written in typescript
+2. eazy to use
+3. memory safety
