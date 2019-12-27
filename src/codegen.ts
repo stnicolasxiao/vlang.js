@@ -3,7 +3,7 @@ import AstNode, { NodeType } from "./ast"
 // input: ast
 // output: il
 
-enum OpType {
+export enum OpType {
   PUSHCHAR,
   PUSHSTRING,
   PUSHINT,
@@ -13,7 +13,7 @@ enum OpType {
   CALL
 }
 
-class OpCode {
+export class OpCode {
   op: OpType
   ival: number
   sval: string
@@ -38,7 +38,7 @@ function generateIlFromFunction(node :AstNode):number {
   return fid
 }
 
-class FunctionDef {
+export class FunctionDef {
   ops: OpCode[]
   functionName:string
   constructor() {
