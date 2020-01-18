@@ -22,7 +22,7 @@ export class OpCode {
   }
 }
 
-function generateIlFromFunction(node :AstNode):number {
+export function generateIlFromFunction(node :AstNode):number {
   if (node.nodeType!= NodeType.NTFUNTION) {
     throw new Error('not a function node')
   }
@@ -100,6 +100,7 @@ export class FunctionDef {
       case NodeType.NTCALL:
         {
           this.gen(OpType.CALL)
+          throw new Error('not implement')
           break
         }
       case NodeType.NTARGS:
@@ -129,7 +130,7 @@ export class FunctionDef {
   }
 }
 
-class FunctionMgr {
+export class FunctionMgr {
   funs: FunctionDef[]
   constructor() {
     this.funs=[]
@@ -144,5 +145,8 @@ class FunctionMgr {
   addFunction(fn:FunctionDef):number{
     this.funs.push(fn)
     return this.funs.length-1
+  }
+  getFunction(fn:number):FunctionDef{
+    return this.funs[fn]
   }
 }

@@ -3,26 +3,57 @@
 // execute
 import { FunctionDef, OpCode, OpType } from './codegen'
 
-enum VarType {
+
+enum ValType {
   VSTRING,
   VINT,
-  VCHAR
+  VCHAR,
+  VREF
 }
-class Variable {
-  varType: VarType
+class Value {
+  valType: ValType
   sval:string
   ival:string
-}
-
-class Stack {
-  stack: Variable[] = []
-
-  push(v :Variable) {
-    this.stack.push(v)
+  constructor(vt:ValType) {
+    this.valType = vt
   }
 }
 
-function run(fn: FunctionDef) {
+function newChar() {
+
+}
+
+function newString(sval:string) :Value{
+  let v:Value=new Value(ValType.VSTRING) 
+  v.sval=sval
+  return v
+}
+
+function newRef(id :string):Value{
+  let v:Value=new Value(ValType.VREF)
+  v.sval=id
+  return v
+}
+
+class Stack {
+  stack: Value[] = []
+
+  push(v :Value) {
+    this.stack.push(v)
+  }
+  get(n: number) :Value {
+    let idx:number=this.stack.length-n-1
+    if (idx>=0 && idx < this.stack.length) {
+      return this.stack[idx]
+    }
+    throw new Error('out of stack'+idx)
+  }
+  pop(n :number) {
+    this.stack.splice(this.stack.length-n, n)
+  }
+}
+
+export function run(fn: FunctionDef) {
   let ops: OpCode[] = fn.ops
   let stack = new Stack()
 
@@ -42,7 +73,8 @@ function run(fn: FunctionDef) {
 
       case OpType.PUSHSTRING:
         {
-          throw new Error('not implement')
+          let v:Value=newString(op.sval)
+          stack.push(v)
           break;
         }
 
@@ -54,7 +86,8 @@ function run(fn: FunctionDef) {
 
       case OpType.PUSHREF:
         {
-          throw new Error('not implement')
+          let ref:Value=newRef(op.sval)
+          stack.push(ref)
           break;
         }
 
@@ -72,7 +105,12 @@ function run(fn: FunctionDef) {
 
       case OpType.CALL:
         {
-          throw new Error('not implement')
+          console.error('add arg len')
+          let fn:Value=stack.get(1)
+          let val:Value=stack.get(0)
+          if (fn.valType==ValType.VREF && fn.sval=="println") {
+            console.log(val.sval)
+          }
           break;
         }
       default:

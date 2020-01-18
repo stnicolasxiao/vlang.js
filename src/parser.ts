@@ -45,6 +45,8 @@ export default class Parser {
 
     let functionName: string = ""
 
+    let body:AstNode=null
+    let args:AstNode=null
     if (this.lexer.tokenType == TokenType.TTIDEN) {
       functionName = this.lexer.token
       this.lexer.nextToken()
@@ -55,7 +57,7 @@ export default class Parser {
 
       this.matchOp("{")
 
-      this.parseStatments()
+      body=this.parseStatments()
 
       this.matchOp("}")
     } else {
@@ -64,6 +66,8 @@ export default class Parser {
 
     let node: AstNode = new AstNode(NodeType.NTFUNTION)
     node.sval = functionName
+    node.addSubNode(args)
+    node.addSubNode(body)
     return node
   }
 
